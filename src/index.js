@@ -17,6 +17,7 @@ import NotFound from './containers/NotFound';
 import CreateAccount from './containers/CreateAccount';
 import PersonalInfo from './containers/PersonalInformation';
 import EmployerPage from './containers/EmployerPage';
+import DocuSign from './containers/DocuSign';
 
 const store = configureStore(initialState);
 
@@ -43,6 +44,7 @@ ReactDOM.render(
         <Route path="createAccount" component={CreateAccount} />
         <Route path="personalInfo" component={PersonalInfo} />
         <Route path="employer" component={EmployerPage} />
+        <Route path="docuSign" component={DocuSign} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

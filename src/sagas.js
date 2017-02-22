@@ -8,6 +8,7 @@ import getQuestionsWatcher from './containers/Questionnaire/saga';
 import getProposalWatcher from './containers/Proposal/saga';
 import getUserInfoWatcher from './containers/CreateAccount/saga';
 import getInitialDataWatcher from './containers/PersonalInformation/saga';
+import getESignDataWatcher from './containers/DocuSign/saga';
 
 export default function* startForman() {
   yield fork(authWatcher);
@@ -15,4 +16,5 @@ export default function* startForman() {
   yield fork(getProposalWatcher);
   yield fork(getUserInfoWatcher);
   yield fork(getInitialDataWatcher);
+  yield fork(getESignDataWatcher);
 }

@@ -8,6 +8,7 @@ import * as questionsReducer  from './containers/Questionnaire/reducer';
 import proposalReducer  from './containers/Proposal/reducer';
 import * as signUpReducer  from './containers/CreateAccount/reducer';
 import * as personalInfoReducer  from './containers/PersonalInformation/reducer';
+import eSignReducer from './containers/DocuSign/reducer';
 import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
@@ -19,5 +20,6 @@ export default combineReducers({
   authenticatedUser:signUpReducer.authenticateUser,
   initialData:personalInfoReducer.userResponseReducer,
   isVerIdVerified:personalInfoReducer.verifyWithVerId,
-  form: formReducer
+  form: formReducer,
+  eSignUrl: eSignReducer
 })

@@ -62,4 +62,14 @@ module.exports.controller = function (app) {
         });
 
     });
+
+
+    app.get('/api/getESignData', function (request, response) {
+        
+        var eSignData = {"eSignID": "1234" , eSignURL: "http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf"}
+
+        return response.json(eSignData);
+
+    });
+    
 };
