@@ -21,34 +21,39 @@ class PopOver extends React.Component {
     }
 
     componentDidMount() {
-        // after render , to get the wrapperRef 
         if (this.props.isOpen) {
             document.addEventListener('mousedown', this.handleClickOutside);
+            window.addEventListener('resize', this.props.hideComponent);
+            this.setState({ popoverOffset: this.calculateOffset(this.props.triggerNode) });
         }
-        this.setState({ popoverOffset: this.calculateOffset(this.props.triggerNode) });
     }
 
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleClickOutside);
+        window.removeEventListener('resize', function() {
+            console.log('Remove resize')
+        });
     }
 
     /**
-    * Alert if clicked on outside of element
+    *  if clicked on outside of element
     */
     handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.props.isOpen) {
-            // hide the component , if clicked outside the PopOver . Includes "Button" Clicked
+        if(this.props.triggerNode === event.target){
+                return;
+            } 
+
+        if ((this.wrapperRef && !this.wrapperRef.contains(event.target) && this.props.isOpen)) {
             this.props.hideComponent();
-        }
+        }        
     }
 
     calculateOffset(triggerNode) {
         const popOverContentNode = this.wrapperRef;
         const placement = this.getPlacement(popOverContentNode);
-        const position = this.getPosition(placement, popOverContentNode, triggerNode);
+        const position = this.getPosition( placement, popOverContentNode, triggerNode);
         popOverContentNode.classList.add(placement);
-
-        return { left: position.left, top: position.top};
+        return { left: position.left, top: position.top };
     }
 
     static getViewPortPos() {
@@ -86,14 +91,15 @@ class PopOver extends React.Component {
         return { left: triggerNode.scrollWidth + triggerNode.offsetLeft, top: -1 * (contentNode.offsetHeight / 2 - triggerNode.offsetHeight / 2) + triggerNode.offsetTop};
     }
 
-
     render() {
         const { isOpen, direction, triggerNode, hideComponent } = this.props;
         const displayClass = isOpen ? 'show' : 'hidden';
         return (
-            <div className={ "popover-content" + ' ' + displayClass } style={ this.state.popoverOffset}
+            <div className={ "popover-content" + ' ' + displayClass + ' ' + this.state.actualPlacement} 
+                style= { this.state.popoverOffset}
                 ref={(node) => { this.wrapperRef = node } }>
-                { this.props.children }</div>
+            { this.props.children }
+            </div>
         )
     }
 }
