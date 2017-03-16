@@ -3,20 +3,30 @@ import createReducer from '../../utils/createReducer';
 import {fromJS} from 'immutable';
 import { combineReducers } from 'redux';
 
-function successHandler(state , action) {
-  console.log(action);
+function docuSignSuccessHandler(state , action) {
   return action.eSignUrl;
 }
-function errorHandler(state, action) {
+function docuSignErrorHandler(state, action) {
   console.log(action);
   return Object.assign({}, state, action.eSignUrl);
 }
 
-const eSignReducer = createReducer('', {
-  'SAGA_DOCUSIGN_ERROR': errorHandler,
-  'SAGA_DOCUSIGN_SUCCESS': successHandler
+function envelopeSuccesshandler(state , action) {
+  return action.envelopeData;
+}
+function envelopeErrorhandler(state, action) {
+  console.log(action);
+  return Object.assign({}, state, action.data);
+}
+
+export const eSignReducer = createReducer('', {
+  'SAGA_DOCUSIGN_ERROR': docuSignErrorHandler,
+  'SAGA_DOCUSIGN_SUCCESS': docuSignSuccessHandler
 });
 
-export default eSignReducer;
+export const envelopeDataReducer = createReducer({}, {
+  'ENVELOPE_DATA_SUCCESS': envelopeSuccesshandler,
+  'ENVELOPE_DATA_ERROR': envelopeErrorhandler
+});
 
 

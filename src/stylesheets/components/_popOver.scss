@@ -1,0 +1,89 @@
+.qs {
+  background-color: #000;
+  color: #e3fbff;
+  display: inline-block;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+  width: 80px;
+  height: 50px;
+}
+
+$arrowHeight: 20px;
+$light-gray: rgb(233, 212, 222);
+.popover-content {
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  background-color: $light-gray;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  z-index: 2000;
+  height: 50px;
+  width: 300px;
+  &::before {
+    content: "";
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+  }
+}
+
+.top {
+  margin-top: -1 * $arrowHeight;
+  &::before {
+    bottom: $arrowHeight * -1;
+    left: 45%;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: $arrowHeight solid $light-gray;
+  }
+}
+
+.bottom {
+  margin-top: $arrowHeight;
+  &::before {
+    top: $arrowHeight * -1;
+    left: 45%;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: $arrowHeight solid $light-gray;
+  }
+}
+
+.left {
+  margin-right: $arrowHeight;
+  &::before {
+    top: 50%;
+    right: $arrowHeight * -1;
+    border-right: 20px solid transparent;
+    border-top: 20px solid $light-gray;
+  }
+}
+
+.right {
+  &::before {
+    top: 38%;
+    left: -1 * $arrowHeight;
+    border-bottom: $arrowHeight solid $light-gray;
+    border-left: 20px solid transparent;
+  }
+}
+
+.show {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
